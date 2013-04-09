@@ -7,9 +7,6 @@
 [submodule "ack.vim"]
 	path = ack.vim
 	url = https://github.com/mileszs/ack.vim.git
-[submodule "command-t"]
-	path = command-t
-	url = git://git.wincent.com/command-t.git
 [submodule "tlib_vim"]
 	path = tlib_vim
 	url = https://github.com/tomtom/tlib_vim.git
@@ -28,3 +25,18 @@
 [submodule "vim-surround"]
 	path = vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "ctrlp.vim"]
+	path = ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim-css-color"]
+	path = vim-css-color
+	url = https://github.com/ap/vim-css-color
+[submodule "Better-CSS-Syntax-for-Vim"]
+	path = Better-CSS-Syntax-for-Vim
+	url = https://github.com/vim-scripts/Better-CSS-Syntax-for-Vim.git
+[submodule "delimitMate"]
+	path = delimitMate
+	url = https://github.com/Raimondi/delimitMate
+[submodule "tagbar"]
+	path = tagbar
+	url = https://github.com/majutsushi/tagbar.git
