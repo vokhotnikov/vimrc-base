@@ -12,4 +12,9 @@ if [ ! -f "$AUTOLOAD_DIR/pathogen.vim" ]; then
   echo "Installed pathogen"
 fi
 
+cd Command-T/ruby/command-t/
+ruby extconf.rb && make
+cd ../../../
+echo "Compiled Command-T native part"
+
 echo "All done"
