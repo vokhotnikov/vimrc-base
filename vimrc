@@ -63,5 +63,5 @@ augroup comment_settings
 augroup END
 
 nmap <C-f> :CommandT<cr>
-nmap <C-t> :CommandTTag<cr>
-nmap <C-b> :CommandTBuffer<cr>
+nmap <C-p> :CommandTTag<cr>
+nmap <C-\> :CommandTBuffer<cr>
