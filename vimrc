@@ -62,6 +62,9 @@ augroup comment_settings
   au BufEnter *.scala setlocal commentstring=//\ %s
 augroup END
 
+"" Remove trailing whitespaces for those file types
+autocmd FileType c,cpp,java,php,ruby,python,scala,javascript,css autocmd BufWritePre <buffer> :%s/\s\+$//e
+
 nmap <C-f> :CommandT<cr>
 nmap <C-p> :CommandTTag<cr>
 nmap <C-\> :CommandTBuffer<cr>
