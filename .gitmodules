@@ -37,3 +37,6 @@
 [submodule "Command-T"]
 	path = Command-T
 	url = https://github.com/wincent/Command-T.git
+[submodule "zencoding-vim"]
+	path = zencoding-vim
+	url = https://github.com/mattn/zencoding-vim.git
