@@ -35,8 +35,7 @@ let g:solarized_termcolors=256
 colorscheme solarized
 
 set number
-set numberwidth=4
-highlight LineNr cterm=NONE ctermfg=lightgray ctermbg=NONE gui=NONE guifg=lightgray guibg=NONE
+set numberwidth=5
 
 if has("gui_running")
   set guifont=Menlo\ Bold:h12
