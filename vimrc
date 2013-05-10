@@ -67,3 +67,5 @@ autocmd FileType c,cpp,java,php,ruby,python,scala,javascript,css autocmd BufWrit
 nmap <C-f> :CommandT<cr>
 nmap <C-p> :CommandTTag<cr>
 nmap <C-\> :CommandTBuffer<cr>
+
+cmap w!! %!sudo tee > /dev/null %
