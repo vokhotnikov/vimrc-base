@@ -37,7 +37,7 @@ set number
 set numberwidth=5
 
 if has("gui_running")
-  set guifont=Menlo\ Bold:h12
+  set guifont=Menlo\ Regular:h12
 
   set guioptions-=T " hide toolbar
 endif
