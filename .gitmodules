@@ -22,9 +22,6 @@
 [submodule "vim-surround"]
 	path = vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "Better-CSS-Syntax-for-Vim"]
-	path = Better-CSS-Syntax-for-Vim
-	url = https://github.com/vim-scripts/Better-CSS-Syntax-for-Vim.git
 [submodule "delimitMate"]
 	path = delimitMate
 	url = https://github.com/Raimondi/delimitMate
