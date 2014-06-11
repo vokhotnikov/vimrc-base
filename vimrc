@@ -36,6 +36,8 @@ colorscheme solarized
 set number
 set numberwidth=5
 
+let g:vim_markdown_initial_foldlevel=5
+
 if has("gui_running")
   set guifont=Menlo\ Regular:h12
 
