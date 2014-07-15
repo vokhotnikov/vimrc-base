@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 AUTOLOAD_DIR=$HOME/.vim/autoload
 
