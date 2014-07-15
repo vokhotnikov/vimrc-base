@@ -31,7 +31,6 @@ set wildignore=.git,*.class,*/target/**,project/target/**
 
 set background=light
 let g:solarized_termcolors=256
-colorscheme solarized
 
 set number
 set numberwidth=5
@@ -55,6 +54,8 @@ if !has('gui_running')
     let g:solarized_termcolors=16
   endif
 endif
+
+colorscheme solarized
 
 augroup comment_settings
   au!
