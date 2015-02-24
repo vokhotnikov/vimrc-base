@@ -6,6 +6,9 @@ let s:vimrcBase=expand("<sfile>:h")
 
 call pathogen#infect(s:vimrcBase . '/{}')
 
+" map ;; to ESC to save some pinky stretching
+imap ;; <ESC>
+
 syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
