@@ -41,7 +41,7 @@ set numberwidth=5
 let g:vim_markdown_initial_foldlevel=5
 
 if has("gui_running")
-  set guifont=Menlo\ Regular:h12
+  set guifont=Monaco\ Regular:h11
 
   set guioptions-=T " hide toolbar
 endif
