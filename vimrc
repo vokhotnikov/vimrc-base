@@ -47,7 +47,9 @@ let g:vim_markdown_initial_foldlevel=5
 if has("gui_running")
   ""  set guifont=Monaco\ Regular:h11
   set guifont=Fira\ Code:h12
-  set macligatures
+  if has("gui_macvim")
+    set macligatures
+  endif
 
   set guioptions-=T " hide toolbar
   set guioptions-=r " hide right scrollbar
