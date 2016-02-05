@@ -1,8 +1,12 @@
 set nocompatible                " choose no compatibility with legacy vi
 
+let s:vimrcBase=expand("<sfile>:h")
+
 let g:CommandTNeverShowDotFiles = 1
 
-let s:vimrcBase=expand("<sfile>:h")
+"" Scala plugin options
+let g:scala_sort_across_groups=1
+let g:scala_first_party_namespaces='\(controllers\|views\|models\|util\|net.vokhot\)'
 
 call pathogen#infect(s:vimrcBase . '/{}')
 
@@ -41,9 +45,12 @@ set numberwidth=5
 let g:vim_markdown_initial_foldlevel=5
 
 if has("gui_running")
-  set guifont=Monaco\ Regular:h11
+  ""  set guifont=Monaco\ Regular:h11
+  set guifont=Fira\ Code:h12
+  set macligatures
 
   set guioptions-=T " hide toolbar
+  set guioptions-=r " hide right scrollbar
 endif
 
 if !has('gui_running')
@@ -68,6 +75,8 @@ augroup END
 
 "" Remove trailing whitespaces for those file types
 autocmd FileType c,cpp,java,php,ruby,python,scala,javascript,css autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+autocmd FileType scala nmap <buffer> <C-_> :SortScalaImports<cr>
 
 nmap <C-f> :CommandT<cr>
 nmap <C-p> :CommandTTag<cr>
