@@ -30,6 +30,9 @@ Plugin 'altercation/vim-colors-solarized'
 " haskell
 Plugin 'dag/vim2hs'
 
+" scala
+Plugin 'derekwyatt/vim-scala'
+
 call vundle#end()
 
 filetype plugin indent on  
