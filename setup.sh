@@ -1,15 +1,14 @@
 #! /usr/bin/env bash
 
-AUTOLOAD_DIR=$HOME/.vim/autoload
+set -u
+set -e
 
-if [ ! -d "$AUTOLOAD_DIR" ]; then
-  mkdir -p $AUTOLOAD_DIR
-  echo "Created vim autoload dir"
-fi
-
-if [ ! -f "$AUTOLOAD_DIR/pathogen.vim" ]; then
-  cp vim-pathogen/autoload/pathogen.vim $AUTOLOAD_DIR/pathogen.vim
-  echo "Installed pathogen"
+if [ ! -d bundles ] ; then
+  mkdir -p bundles
+  if [ ! -d bundles/Vundle.vim ] ; then
+    git clone https://github.com/VundleVim/Vundle.vim.git bundles/Vundle.vim
+    echo "Vundle installed"
+  fi
 fi
 
 if [ -d Command-T ] ; then

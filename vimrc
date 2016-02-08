@@ -1,52 +1,65 @@
 set nocompatible                " choose no compatibility with legacy vi
+filetype off
+
+set encoding=utf-8
 
 let s:vimrcBase=expand("<sfile>:h")
+let s:vundleBase=s:vimrcBase . "/bundles/Vundle.vim"
 
-let g:CommandTNeverShowDotFiles = 1
+if empty(&rtp)
+  let &rtp=s:vundleBase
+else
+  let &rtp=&rtp.','.s:vundleBase
+endif
 
-"" Scala plugin options
-let g:scala_sort_across_groups=1
-let g:scala_first_party_namespaces='\(controllers\|views\|models\|util\|net.vokhot\)'
+call vundle#begin(s:vimrcBase . "/bundles")
 
-call pathogen#infect(s:vimrcBase . '/{}')
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-" map ;; to ESC to save some pinky stretching
-imap ;; <ESC>
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-fugitive'
 
-syntax enable
-set encoding=utf-8
+Plugin 'scrooloose/syntastic'
+let g:syntastic_always_populate_loc_list=1
+
+Plugin 'altercation/vim-colors-solarized'
+
+"" language-specific
+" haskell
+Plugin 'dag/vim2hs'
+
+call vundle#end()
+
+filetype plugin indent on  
+
 set showcmd                     " display incomplete commands
-filetype plugin indent on       " load file type plugins + indentation
 
 "" Whitespace
 set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
-set backspace=indent,eol,start  " backspace through everything in insert mode
-set list listchars=tab:▸\ ,trail:·
+
+"" Searching
+set hlsearch                    " highlight matches
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter
+
+"" layout/font/colors
 
 set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}%=\ lin:%l\,%L\ col:%c%V\ pos:%o\ ascii:%b\ %P
 set laststatus=2
 
-"" Searching
-set hlsearch                    " highlight matches
-set incsearch                   " incremental searching
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital letter
-
-set wildignore=.git,*.class,*/target/**,project/target/**
-
-set background=light
-let g:solarized_termcolors=256
-
 set number
 set numberwidth=5
 
-let g:vim_markdown_initial_foldlevel=5
-
 if has("gui_running")
-  ""  set guifont=Monaco\ Regular:h11
-  set guifont=Fira\ Code:h12
+  if empty(g:force_guifont)
+    set guifont=Monaco\ Regular:h11
+  else
+    let &guifont=g:force_guifont
+  endif
   if has("gui_macvim")
     set macligatures
   endif
@@ -54,6 +67,11 @@ if has("gui_running")
   set guioptions-=T " hide toolbar
   set guioptions-=r " hide right scrollbar
 endif
+
+"" Solarized
+
+set background=light
+let g:solarized_termcolors=256
 
 if !has('gui_running')
 " Compatibility for Terminal
@@ -69,19 +87,35 @@ endif
 
 colorscheme solarized
 
-augroup comment_settings
-  au!
-  au BufEnter * setlocal commentstring=/*\ %s\ */
-  au BufEnter *.scala setlocal commentstring=//\ %s
-augroup END
+"" map ;; to ESC to save some pinky stretching
+imap ;; <ESC>
 
-"" Remove trailing whitespaces for those file types
-autocmd FileType c,cpp,java,php,ruby,python,scala,javascript,css autocmd BufWritePre <buffer> :%s/\s\+$//e
-
-autocmd FileType scala nmap <buffer> <C-_> :SortScalaImports<cr>
-
-nmap <C-f> :CommandT<cr>
-nmap <C-p> :CommandTTag<cr>
-nmap <C-\> :CommandTBuffer<cr>
-
+"" help when forget to do sudo
 cmap w!! %!sudo tee > /dev/null %
+
+"let g:CommandTNeverShowDotFiles = 1
+"
+""" Scala plugin options
+"let g:scala_sort_across_groups=1
+"let g:scala_first_party_namespaces='\(controllers\|views\|models\|util\|net.vokhot\)'
+"
+"
+"set wildignore=.git,*.class,*/target/**,project/target/**
+"
+"let g:vim_markdown_initial_foldlevel=5
+"
+"augroup comment_settings
+"  au!
+"  au BufEnter * setlocal commentstring=/*\ %s\ */
+"  au BufEnter *.scala setlocal commentstring=//\ %s
+"augroup END
+"
+""" Remove trailing whitespaces for those file types
+"autocmd FileType c,cpp,java,php,ruby,python,scala,javascript,css autocmd BufWritePre <buffer> :%s/\s\+$//e
+"
+"autocmd FileType scala nmap <buffer> <C-_> :SortScalaImports<cr>
+"
+"nmap <C-f> :CommandT<cr>
+"nmap <C-p> :CommandTTag<cr>
+"nmap <C-\> :CommandTBuffer<cr>
+"
