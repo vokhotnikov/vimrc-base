@@ -24,6 +24,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 let g:syntastic_always_populate_loc_list=1
 
+" temporary include command-T until there is better option
+Plugin 'wincent/command-t'
+
 Plugin 'altercation/vim-colors-solarized'
 
 "" language-specific
@@ -117,8 +120,7 @@ cmap w!! %!sudo tee > /dev/null %
 "autocmd FileType c,cpp,java,php,ruby,python,scala,javascript,css autocmd BufWritePre <buffer> :%s/\s\+$//e
 "
 "autocmd FileType scala nmap <buffer> <C-_> :SortScalaImports<cr>
-"
-"nmap <C-f> :CommandT<cr>
-"nmap <C-p> :CommandTTag<cr>
-"nmap <C-\> :CommandTBuffer<cr>
-"
+
+nmap <C-f> :CommandT<cr>
+nmap <C-p> :CommandTTag<cr>
+nmap <C-\> :CommandTBuffer<cr>
