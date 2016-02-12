@@ -124,3 +124,5 @@ cmap w!! %!sudo tee > /dev/null %
 nmap <C-f> :CommandT<cr>
 nmap <C-p> :CommandTTag<cr>
 nmap <C-\> :CommandTBuffer<cr>
+
+autocmd BufEnter *.hs set formatprg=pointfree
