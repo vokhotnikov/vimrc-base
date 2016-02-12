@@ -32,6 +32,7 @@ Plugin 'altercation/vim-colors-solarized'
 "" language-specific
 " haskell
 Plugin 'dag/vim2hs'
+Plugin 'bitc/vim-hdevtools'
 
 " scala
 Plugin 'derekwyatt/vim-scala'
@@ -126,3 +127,7 @@ nmap <C-p> :CommandTTag<cr>
 nmap <C-\> :CommandTBuffer<cr>
 
 autocmd BufEnter *.hs set formatprg=pointfree
+
+au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
