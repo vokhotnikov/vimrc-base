@@ -65,13 +65,17 @@ set number
 set numberwidth=5
 
 if has("gui_running")
-  if empty(g:force_guifont)
-    set guifont=Monaco\ Regular:h11
-  else
+  if exists("g:force_guifont")
     let &guifont=g:force_guifont
+  else
+    set guifont=Monaco\ Regular:h11
   endif
   if has("gui_macvim")
     set macligatures
+  endif
+
+  if has("gui_gtk2")
+    set guiheadroom=0
   endif
 
   set guioptions-=T " hide toolbar
