@@ -11,8 +11,8 @@ if [ ! -d bundles ] ; then
   fi
 fi
 
-if [ -d Command-T ] ; then
-  cd Command-T/ruby/command-t/
+if [ -d bundles/Command-T ] ; then
+  cd bundles/Command-T/ruby/command-t/
   ruby extconf.rb && make
   cd ../../../
   echo "Compiled Command-T native part"
