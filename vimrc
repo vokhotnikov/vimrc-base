@@ -17,25 +17,37 @@ call vundle#begin(s:vimrcBase . "/bundles")
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
 
-Plugin 'scrooloose/syntastic'
-let g:syntastic_always_populate_loc_list=1
-
 " temporary include command-T until there is better option
-Plugin 'wincent/command-t'
+" Plugin 'wincent/command-t'
 
 Plugin 'altercation/vim-colors-solarized'
 
 "" language-specific
 " haskell
+Plugin 'https://github.com/eagletmt/ghcmod-vim.git'
+Plugin 'https://github.com/eagletmt/neco-ghc'
+
 Plugin 'dag/vim2hs'
 Plugin 'bitc/vim-hdevtools'
 
 " scala
 Plugin 'derekwyatt/vim-scala'
+
+Plugin 'https://github.com/ctrlpvim/ctrlp.vim.git'
+Plugin 'https://github.com/scrooloose/syntastic.git'
+Plugin 'https://github.com/tomtom/tlib_vim.git'
+Plugin 'https://github.com/MarcWeber/vim-addon-mw-utils.git'
+Plugin 'https://github.com/garbas/vim-snipmate.git'
+Plugin 'https://github.com/scrooloose/nerdtree.git'
+Plugin 'https://github.com/scrooloose/nerdcommenter.git'
+Plugin 'https://github.com/godlygeek/tabular.git'
+Plugin 'https://github.com/ervandew/supertab.git'
+Plugin 'https://github.com/Shougo/neocomplete.vim.git'
+Plugin 'https://github.com/Shougo/vimproc.vim.git'
 
 call vundle#end()
 
@@ -63,6 +75,19 @@ set laststatus=2
 
 set number
 set numberwidth=5
+
+set smartindent
+
+set clipboard=unnamedplus,autoselect
+
+set completeopt=menuone,menu,longest
+
+set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.hg,target,.cabal-sandbox
+set wildmode=longest,list,full
+set wildmenu
+set completeopt+=longest
+
+set cmdheight=1
 
 if has("gui_running")
   if exists("g:force_guifont")
@@ -101,8 +126,22 @@ endif
 
 colorscheme solarized
 
-"" map ;; to ESC to save some pinky stretching
-imap ;; <ESC>
+"" map jk to ESC to save some pinky stretching
+inoremap jk <ESC>
+
+"" unmap esc and arrows to break the habit of using them
+inoremap <ESC> <NOP>
+
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+
 
 "" help when forget to do sudo
 cmap w!! %!sudo tee > /dev/null %
@@ -129,12 +168,50 @@ cmap w!! %!sudo tee > /dev/null %
 "
 "autocmd FileType scala nmap <buffer> <C-_> :SortScalaImports<cr>
 
-nmap <C-f> :CommandT<cr>
-nmap <C-p> :CommandTTag<cr>
-nmap <C-\> :CommandTBuffer<cr>
+" Syntastic
+map <Leader>s :SyntasticToggleMode<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
 
 autocmd BufEnter *.hs set formatprg=pointfree
 
-au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
+" ghc-mod
+map <silent> tw :GhcModTypeInsert<CR>
+map <silent> ts :GhcModSplitFunCase<CR>
+map <silent> tq :GhcModType<CR>
+map <silent> te :GhcModTypeClear<CR>
+
+" supertab
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+
+if has("gui_running")
+  imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+else " no gui
+  if has("unix")
+    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+  endif
+endif
+
+let g:haskellmode_completion_ghc = 1
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" tabularize
+let g:haskell_tabular = 1
+
+vmap a= :Tabularize /=<CR>
+vmap a; :Tabularize /::<CR>
+vmap a- :Tabularize /-><CR>
+
+" Ctrl+P
+map <silent> <Leader>t :CtrlP()<CR>
+noremap <leader>b<space> :CtrlPBuffer<cr>
+let g:ctrlp_custom_ignore = '\v[\/]dist$'
+
+map <Leader>n :NERDTreeToggle<CR>
