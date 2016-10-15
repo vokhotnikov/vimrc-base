@@ -105,6 +105,7 @@ if has("gui_running")
 
   set guioptions-=T " hide toolbar
   set guioptions-=r " hide right scrollbar
+  set guioptions-=m " hide menu
 endif
 
 "" Solarized
