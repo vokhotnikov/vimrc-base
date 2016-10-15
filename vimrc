@@ -170,7 +170,7 @@ cmap w!! %!sudo tee > /dev/null %
 "autocmd FileType scala nmap <buffer> <C-_> :SortScalaImports<cr>
 
 " Syntastic
-map <Leader>s :SyntasticToggleMode<CR>
+noremap <Leader>s :SyntasticToggleMode<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -184,16 +184,16 @@ let g:syntastic_check_on_wq = 0
 autocmd BufEnter *.hs set formatprg=pointfree
 
 " ghc-mod
-map <silent> tw :GhcModTypeInsert<CR>
-map <silent> ts :GhcModSplitFunCase<CR>
-map <silent> tq :GhcModType<CR>
-map <silent> te :GhcModTypeClear<CR>
+noremap <silent> tw :GhcModTypeInsert<CR>
+noremap <silent> ts :GhcModSplitFunCase<CR>
+noremap <silent> tq :GhcModType<CR>
+noremap <silent> te :GhcModTypeClear<CR>
 
 " supertab
 let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 
 if has("gui_running")
-  imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+  inoremap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
 else " no gui
   if has("unix")
     inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
@@ -206,13 +206,16 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 " tabularize
 let g:haskell_tabular = 1
 
-vmap a= :Tabularize /=<CR>
-vmap a; :Tabularize /::<CR>
-vmap a- :Tabularize /-><CR>
+vnoremap a= :Tabularize /=<CR>
+vnoremap a; :Tabularize /::<CR>
+vnoremap a- :Tabularize /-><CR>
 
 " Ctrl+P
-map <silent> <Leader>t :CtrlP()<CR>
+noremap <silent> <Leader>t :CtrlP()<CR>
 noremap <leader>b<space> :CtrlPBuffer<cr>
 let g:ctrlp_custom_ignore = '\v[\/]dist$'
 
-map <Leader>n :NERDTreeToggle<CR>
+noremap <Leader>n :NERDTreeToggle<CR>
+
+" quick vimrc edit mapping
+nnoremap <leader>evm :vsplit $HOME/vimrc-base/vimrc<cr>G
