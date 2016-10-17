@@ -78,7 +78,7 @@ set numberwidth=5
 
 set smartindent
 
-set clipboard=unnamedplus,autoselect
+set clipboard=unnamed,unnamedplus,autoselect
 
 set completeopt=menuone,menu,longest
 
