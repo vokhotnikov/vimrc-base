@@ -127,26 +127,6 @@ endif
 
 colorscheme solarized
 
-"" map jk to ESC to save some pinky stretching
-inoremap jk <ESC>
-
-"" unmap esc and arrows to break the habit of using them
-inoremap <ESC> <NOP>
-
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-
-
-"" help when forget to do sudo
-cmap w!! %!sudo tee > /dev/null %
-
 "let g:CommandTNeverShowDotFiles = 1
 "
 """ Scala plugin options
@@ -170,8 +150,6 @@ cmap w!! %!sudo tee > /dev/null %
 "autocmd FileType scala nmap <buffer> <C-_> :SortScalaImports<cr>
 
 " Syntastic
-noremap <Leader>s :SyntasticToggleMode<CR>
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -183,39 +161,21 @@ let g:syntastic_check_on_wq = 0
 
 autocmd BufEnter *.hs set formatprg=pointfree
 
-" ghc-mod
-noremap <silent> tw :GhcModTypeInsert<CR>
-noremap <silent> ts :GhcModSplitFunCase<CR>
-noremap <silent> tq :GhcModType<CR>
-noremap <silent> te :GhcModTypeClear<CR>
-
-" supertab
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-
-if has("gui_running")
-  inoremap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-else " no gui
-  if has("unix")
-    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-  endif
-endif
-
 let g:haskellmode_completion_ghc = 1
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " tabularize
-let g:haskell_tabular = 1
-
 vnoremap a= :Tabularize /=<CR>
 vnoremap a; :Tabularize /::<CR>
 vnoremap a- :Tabularize /-><CR>
 
 " Ctrl+P
-noremap <silent> <Leader>t :CtrlP()<CR>
-noremap <leader>b<space> :CtrlPBuffer<cr>
 let g:ctrlp_custom_ignore = '\v[\/]dist$'
 
-noremap <Leader>n :NERDTreeToggle<CR>
+let s:mappings_path=s:vimrcBase . "/mappings.vim"
+execute "source " .fnameescape(s:mappings_path)
 
-" quick vimrc edit mapping
-nnoremap <leader>evm :vsplit $HOME/vimrc-base/vimrc<cr>G
+" quick mapping file edit
+execute "nnoremap <leader>evm :vsplit " . fnameescape(s:mappings_path) . "<cr>G"
+" ... and source
+execute "nnoremap <leader>evs :source " . fnameescape(s:mappings_path) . "<cr>"
