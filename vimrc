@@ -89,8 +89,8 @@ set smartcase                   " ... unless they contain at least one capital l
 set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}%=\ lin:%l\,%L\ col:%c%V\ pos:%o\ ascii:%b\ %P
 set laststatus=2
 
-set number
-set numberwidth=5
+set relativenumber
+set numberwidth=4
 
 set smartindent
 
