@@ -24,6 +24,7 @@ cmap w!! %!sudo tee > /dev/null %
 
 "" split window switch
 noremap <leader><space> <C-w>w
+
 "
 "" Syntastic
 "noremap <Leader>s :SyntasticToggleMode<CR>
@@ -55,6 +56,15 @@ noremap <leader><space> <C-w>w
 "" NERDTree
 "noremap <Leader>n :NERDTreeToggle<CR>
 "
+
+" filetype-specifics
+augroup mkdmaps
+  autocmd!
+
+  autocmd FileType markdown :onoremap ih :<C-u>execute "normal! ?^[=-][=-]\\+$\r:nohlsearch\rkvg_"<cr>
+  autocmd FileType markdown :onoremap ah :<C-u>execute "normal! ?^[=-][=-]\\+$\r:nohlsearch\rg_vk0"<cr>
+augroup END
+
 "" abbreviations
 iabbrev @-- Regards, Vladimir Okhotnikov
 iabbrev @--r С уважением, Владимир Охотников
