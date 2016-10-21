@@ -12,13 +12,10 @@ set path+=**
 set wildmenu
 set wildmode=longest:full
 
-" Tweaks for NETRW browsing
-let g:netrw_banner=0        " disable annoying banner
-let g:netrw_browse_split=4  " open in prior window
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+"suffixes?
+"wildignore?
+
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 """" Vundle integration below
 
@@ -40,6 +37,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround.git'
+Plugin 'tpope/vim-vinegar'
 
 " temporary include command-T until there is better option
 " Plugin 'wincent/command-t'
