@@ -17,6 +17,10 @@ set wildmode=longest:full
 
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
+" show invisibles
+set showbreak=↪\ 
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+
 """" Vundle integration below
 
 let s:vimrcBase=expand("<sfile>:h")
