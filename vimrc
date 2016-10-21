@@ -38,6 +38,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround.git'
 Plugin 'tpope/vim-vinegar'
+Plugin 'vim-airline/vim-airline'
 
 " temporary include command-T until there is better option
 " Plugin 'wincent/command-t'
