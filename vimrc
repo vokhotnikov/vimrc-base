@@ -3,6 +3,25 @@ filetype off
 
 set encoding=utf-8
 
+syntax enable
+filetype plugin indent on  
+
+" the following 2 statements provide basic find functionality
+set path+=**
+
+set wildmenu
+set wildmode=longest:full
+
+" Tweaks for NETRW browsing
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+"""" Vundle integration below
+
 let s:vimrcBase=expand("<sfile>:h")
 let s:vundleBase=s:vimrcBase . "/bundles/Vundle.vim"
 
@@ -20,6 +39,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround.git'
 
 " temporary include command-T until there is better option
 " Plugin 'wincent/command-t'
@@ -28,30 +48,28 @@ Plugin 'altercation/vim-colors-solarized'
 
 "" language-specific
 " haskell
-Plugin 'https://github.com/eagletmt/ghcmod-vim.git'
-Plugin 'https://github.com/eagletmt/neco-ghc'
+" Plugin 'https://github.com/eagletmt/ghcmod-vim.git'
+" Plugin 'https://github.com/eagletmt/neco-ghc'
 
-Plugin 'dag/vim2hs'
-Plugin 'bitc/vim-hdevtools'
+" Plugin 'dag/vim2hs'
+" Plugin 'bitc/vim-hdevtools'
 
 " scala
-Plugin 'derekwyatt/vim-scala'
+" Plugin 'derekwyatt/vim-scala'
 
-Plugin 'https://github.com/ctrlpvim/ctrlp.vim.git'
-Plugin 'https://github.com/scrooloose/syntastic.git'
-Plugin 'https://github.com/tomtom/tlib_vim.git'
-Plugin 'https://github.com/MarcWeber/vim-addon-mw-utils.git'
-Plugin 'https://github.com/garbas/vim-snipmate.git'
-Plugin 'https://github.com/scrooloose/nerdtree.git'
-Plugin 'https://github.com/scrooloose/nerdcommenter.git'
-Plugin 'https://github.com/godlygeek/tabular.git'
-Plugin 'https://github.com/ervandew/supertab.git'
-Plugin 'https://github.com/Shougo/neocomplete.vim.git'
-Plugin 'https://github.com/Shougo/vimproc.vim.git'
+" Plugin 'https://github.com/ctrlpvim/ctrlp.vim.git'
+" Plugin 'https://github.com/scrooloose/syntastic.git'
+" Plugin 'https://github.com/tomtom/tlib_vim.git'
+" Plugin 'https://github.com/MarcWeber/vim-addon-mw-utils.git'
+" Plugin 'https://github.com/garbas/vim-snipmate.git'
+" Plugin 'https://github.com/scrooloose/nerdtree.git'
+" Plugin 'https://github.com/scrooloose/nerdcommenter.git'
+" Plugin 'https://github.com/godlygeek/tabular.git'
+" Plugin 'https://github.com/ervandew/supertab.git'
+" Plugin 'https://github.com/Shougo/neocomplete.vim.git'
+" Plugin 'https://github.com/Shougo/vimproc.vim.git'
 
 call vundle#end()
-
-filetype plugin indent on  
 
 set showcmd                     " display incomplete commands
 
@@ -80,13 +98,12 @@ set smartindent
 
 set clipboard=unnamed,unnamedplus,autoselect
 
-set completeopt=menuone,menu,longest
-
-set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.hg,target,.cabal-sandbox
-set wildmode=longest,list,full
-set wildmenu
-set completeopt+=longest
-
+"set completeopt=menuone,menu,longest
+"
+"set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.hg,target,.cabal-sandbox
+"set wildmode=longest,list,full
+"set completeopt+=longest
+"
 set cmdheight=1
 
 if has("gui_running")
@@ -148,30 +165,30 @@ colorscheme solarized
 "autocmd FileType c,cpp,java,php,ruby,python,scala,javascript,css autocmd BufWritePre <buffer> :%s/\s\+$//e
 "
 "autocmd FileType scala nmap <buffer> <C-_> :SortScalaImports<cr>
-
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-autocmd BufEnter *.hs set formatprg=pointfree
-
-let g:haskellmode_completion_ghc = 1
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-" tabularize
-vnoremap a= :Tabularize /=<CR>
-vnoremap a; :Tabularize /::<CR>
-vnoremap a- :Tabularize /-><CR>
-
-" Ctrl+P
-let g:ctrlp_custom_ignore = '\v[\/]dist$'
-
+"
+"" Syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+"
+"autocmd BufEnter *.hs set formatprg=pointfree
+"
+"let g:haskellmode_completion_ghc = 1
+"autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+"
+"" tabularize
+"vnoremap a= :Tabularize /=<CR>
+"vnoremap a; :Tabularize /::<CR>
+"vnoremap a- :Tabularize /-><CR>
+"
+"" Ctrl+P
+"let g:ctrlp_custom_ignore = '\v[\/]dist$'
+"
 let s:mappings_path=s:vimrcBase . "/mappings.vim"
 execute "source " .fnameescape(s:mappings_path)
 
