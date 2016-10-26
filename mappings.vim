@@ -57,6 +57,10 @@ noremap <leader><space> <C-w>w
 "noremap <Leader>n :NERDTreeToggle<CR>
 "
 
+nnoremap <leader>f :find *
+
+nnoremap <leader>st :TagbarToggle<cr>
+
 " filetype-specifics
 augroup mkdmaps
   autocmd!
@@ -65,7 +69,13 @@ augroup mkdmaps
   autocmd FileType markdown :onoremap ah :<C-u>execute "normal! ?^[=-][=-]\\+$\r:nohlsearch\rg_vk0"<cr>
 augroup END
 
-"" abbreviations
+augroup haskellmaps
+  autocmd!
+
+  autocmd BufWrite *.hs :silent !fast-tags -R app src test<cr>
+augroup END
+
+" abbreviations
 iabbrev @-- Regards, Vladimir Okhotnikov
 iabbrev @--r С уважением, Владимир Охотников
 

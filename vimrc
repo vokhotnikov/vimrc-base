@@ -21,6 +21,8 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 set showbreak=↪\ 
 set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
+set tags=./tags,tags;$HOME
+
 """" Vundle integration below
 
 let s:vimrcBase=expand("<sfile>:h")
@@ -42,7 +44,10 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround.git'
 Plugin 'tpope/vim-vinegar'
+
 Plugin 'vim-airline/vim-airline'
+
+Plugin 'majutsushi/tagbar'
 
 " temporary include command-T until there is better option
 " Plugin 'wincent/command-t'
