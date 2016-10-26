@@ -16,8 +16,29 @@ noremap <Right> <NOP>
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 
+"" swap colon and comma re: https://konfekt.github.io/blog/2016/10/03/get-the-leader-right
+nnoremap : ,
+xnoremap : ,
+onoremap : ,
 
-noremap g<space> :find *
+nnoremap , :
+xnoremap , :
+onoremap , :
+
+nnoremap g: g,
+nnoremap g, <NOP>
+
+nnoremap @, @:
+nnoremap @: <NOP>
+
+" NOTE: Causes lag when 'q' is hit, for example when
+" - stopping to record a macro or
+" - exiting a buffer by a custom mapping to 'q'.
+nnoremap q, q:
+xnoremap q, q:
+
+nnoremap q: <NOP>
+xnoremap q: <NOP>
 
 "" help when forget to do sudo
 cmap w!! %!sudo tee > /dev/null %
@@ -25,41 +46,35 @@ cmap w!! %!sudo tee > /dev/null %
 "" split window switch
 noremap <leader><space> <C-w>w
 
-"
-"" Syntastic
-"noremap <Leader>s :SyntasticToggleMode<CR>
-"
-"" ghc-mod
-"noremap <silent> tw :GhcModTypeInsert<CR>
-"noremap <silent> ts :GhcModSplitFunCase<CR>
-"noremap <silent> tq :GhcModType<CR>
-"noremap <silent> te :GhcModTypeClear<CR>
-"
-"" supertab
-"let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-"
-"if has("gui_running")
-"  inoremap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-"else " no gui
-"  if has("unix")
-"    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-"  endif
-"endif
-"
-"" tabularize
-"let g:haskell_tabular = 1
-"
-"" Ctrl+P
-"noremap <silent> <Leader>t :CtrlP()<CR>
-"noremap <leader>b<space> :CtrlPBuffer<cr>
-"
-"" NERDTree
-"noremap <Leader>n :NERDTreeToggle<CR>
-"
+" Syntastic
+noremap <Leader>s :SyntasticToggleMode<CR>
 
-nnoremap <leader>f :find *
+" ghc-mod
+noremap <silent> tw :GhcModTypeInsert<CR>
+noremap <silent> ts :GhcModSplitFunCase<CR>
+noremap <silent> tq :GhcModType<CR>
+noremap <silent> te :GhcModTypeClear<CR>
 
-nnoremap <leader>st :TagbarToggle<cr>
+" supertab
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+
+if has("gui_running")
+  inoremap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+else " no gui
+  if has("unix")
+    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+  endif
+endif
+
+" tabularize
+let g:haskell_tabular = 1
+
+" Ctrl+P
+noremap <silent> <Leader>t :CtrlP()<CR>
+noremap <leader>b<space> :CtrlPBuffer<cr>
+
+" NERDTree
+noremap <Leader>n :NERDTreeToggle<CR>
 
 " filetype-specifics
 augroup mkdmaps
@@ -69,13 +84,9 @@ augroup mkdmaps
   autocmd FileType markdown :onoremap ah :<C-u>execute "normal! ?^[=-][=-]\\+$\r:nohlsearch\rg_vk0"<cr>
 augroup END
 
-augroup haskellmaps
-  autocmd!
 
-  autocmd BufWrite *.hs :silent !fast-tags -R app src test<cr>
-augroup END
 
-" abbreviations
+"" abbreviations
 iabbrev @-- Regards, Vladimir Okhotnikov
 iabbrev @--r С уважением, Владимир Охотников
 
