@@ -40,43 +40,56 @@ xnoremap q, q:
 nnoremap q: <NOP>
 xnoremap q: <NOP>
 
-"" help when forget to do sudo
-cmap w!! %!sudo tee > /dev/null %
-
-"" split window switch
-noremap <leader><space> <C-w>w
-
-" Syntastic
-noremap <Leader>s :SyntasticToggleMode<CR>
-
-" ghc-mod
-noremap <silent> tw :GhcModTypeInsert<CR>
-noremap <silent> ts :GhcModSplitFunCase<CR>
-noremap <silent> tq :GhcModType<CR>
-noremap <silent> te :GhcModTypeClear<CR>
-
-" supertab
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-
-if has("gui_running")
-  inoremap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-else " no gui
-  if has("unix")
-    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-  endif
-endif
-
-" tabularize
-let g:haskell_tabular = 1
-
-" Ctrl+P
-noremap <silent> <Leader>t :CtrlP()<CR>
-noremap <leader>b<space> :CtrlPBuffer<cr>
-
-" NERDTree
-noremap <Leader>n :NERDTreeToggle<CR>
-
+""" help when forget to do sudo
+"cmap w!! %!sudo tee > /dev/null %
+"
+""" split window switch
+"noremap <leader><space> <C-w>w
+"
+"" Syntastic
+"noremap <Leader>s :SyntasticToggleMode<CR>
+"
+"" ghc-mod
+"noremap <silent> tw :GhcModTypeInsert<CR>
+"noremap <silent> ts :GhcModSplitFunCase<CR>
+"noremap <silent> tq :GhcModType<CR>
+"noremap <silent> te :GhcModTypeClear<CR>
+"
+"" supertab
+"let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+"
+"if has("gui_running")
+"  inoremap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+"else " no gui
+"  if has("unix")
+"    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+"  endif
+"endif
+"
+"" tabularize
+"let g:haskell_tabular = 1
+"
+"" Ctrl+P
+"noremap <silent> <Leader>t :CtrlP()<CR>
+"noremap <leader>b<space> :CtrlPBuffer<cr>
+"
+"" NERDTree
+"noremap <Leader>n :NERDTreeToggle<CR>
+"
 " filetype-specifics
+
+" Aliases
+func Eatchar(pat)
+  let c = nr2char(getchar(0))
+  return (c =~ a:pat) ? '' : c
+endfunc
+
+Alias w!! write\ !sudo\ tee\ >\ /dev/null\ %
+Alias f find\ *<c-r>=Eatchar("\ ")<cr>
+
+Alias tb TagbarToggle<cr>
+Alias tsm SyntasticToggleMode<cr>
+
 augroup mkdmaps
   autocmd!
 

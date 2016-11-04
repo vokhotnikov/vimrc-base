@@ -4,7 +4,7 @@ filetype off
 set encoding=utf-8
 
 syntax enable
-filetype plugin indent on  
+filetype plugin indent on
 
 " the following 2 statements provide basic find functionality
 set path+=**
@@ -18,7 +18,7 @@ set wildmode=longest:full
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 " show invisibles
-set showbreak=↪\ 
+set showbreak=↪\
 set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
 set tags=./tags,tags;$HOME
@@ -46,8 +46,11 @@ Plugin 'tpope/vim-surround.git'
 Plugin 'tpope/vim-vinegar'
 
 Plugin 'vim-airline/vim-airline'
+Plugin 'Konfekt/vim-alias'
 
 Plugin 'majutsushi/tagbar'
+
+Plugin 'https://github.com/scrooloose/syntastic.git'
 
 " temporary include command-T until there is better option
 " Plugin 'wincent/command-t'
@@ -66,7 +69,6 @@ Plugin 'altercation/vim-colors-solarized'
 " Plugin 'derekwyatt/vim-scala'
 
 " Plugin 'https://github.com/ctrlpvim/ctrlp.vim.git'
-" Plugin 'https://github.com/scrooloose/syntastic.git'
 " Plugin 'https://github.com/tomtom/tlib_vim.git'
 " Plugin 'https://github.com/MarcWeber/vim-addon-mw-utils.git'
 " Plugin 'https://github.com/garbas/vim-snipmate.git'
@@ -178,12 +180,12 @@ colorscheme solarized
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-"
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
-"
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
 "autocmd BufEnter *.hs set formatprg=pointfree
 "
 "let g:haskellmode_completion_ghc = 1
@@ -198,9 +200,18 @@ colorscheme solarized
 "let g:ctrlp_custom_ignore = '\v[\/]dist$'
 "
 let s:mappings_path=s:vimrcBase . "/mappings.vim"
-execute "source " .fnameescape(s:mappings_path)
 
 " quick mapping file edit
 execute "nnoremap <leader>evm :vsplit " . fnameescape(s:mappings_path) . "<cr>G"
 " ... and source
 execute "nnoremap <leader>evs :source " . fnameescape(s:mappings_path) . "<cr>"
+
+if exists('s:loaded_vimafter')
+  silent doautocmd VimAfter VimEnter *
+else
+  let s:loaded_vimafter = 1
+  augroup VimAfter
+    autocmd!
+    autocmd VimEnter * execute "source " .fnameescape(s:mappings_path)
+  augroup END
+endif
