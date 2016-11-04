@@ -45,6 +45,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround.git'
 Plugin 'tpope/vim-vinegar'
 
+Plugin 'Konfekt/vim-alias'
+
 Plugin 'vim-airline/vim-airline'
 Plugin 'Konfekt/vim-alias'
 
@@ -199,6 +201,37 @@ let g:syntastic_check_on_wq = 0
 "" Ctrl+P
 "let g:ctrlp_custom_ignore = '\v[\/]dist$'
 "
+
+if executable('fast-tags')
+    let g:tagbar_type_haskell = {
+        \ 'ctagsbin' : 'fast-tags',
+        \ 'ctagsargs' : '-o -',
+        \ 'kinds' : [
+            \ 'm:module:0',
+            \ 'e:exports:1',
+            \ 'i:imports:1',
+            \ 't:declarations:0',
+            \ 'd:declarations:1',
+            \ 'n:declarations:1',
+            \ 'f:functions:0',
+            \ 'c:constructors:0'
+        \ ],
+        \ 'sro' : '.',
+        \ 'kind2scope' : {
+            \ 'd' : 'data',
+            \ 'n' : 'newtype',
+            \ 'c' : 'constructor',
+            \ 't' : 'type'
+        \ },
+        \ 'scope2kind' : {
+            \ 'data' : 'd',
+            \ 'newtype' : 'n',
+            \ 'constructor' : 'c',
+            \ 'type' : 't'
+        \ }
+    \ }
+endif
+
 let s:mappings_path=s:vimrcBase . "/mappings.vim"
 
 " quick mapping file edit
