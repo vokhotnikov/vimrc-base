@@ -48,7 +48,6 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'Konfekt/vim-alias'
 
 Plugin 'vim-airline/vim-airline'
-Plugin 'Konfekt/vim-alias'
 
 Plugin 'majutsushi/tagbar'
 
