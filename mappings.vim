@@ -40,12 +40,10 @@ xnoremap q, q:
 nnoremap q: <NOP>
 xnoremap q: <NOP>
 
-""" help when forget to do sudo
-"cmap w!! %!sudo tee > /dev/null %
-"
 """ split window switch
-"noremap <leader><space> <C-w>w
+noremap g<space> <C-w>w
 "
+
 "" Syntastic
 "noremap <Leader>s :SyntasticToggleMode<CR>
 "
@@ -76,20 +74,24 @@ xnoremap q: <NOP>
 "" NERDTree
 "noremap <Leader>n :NERDTreeToggle<CR>
 "
-" filetype-specifics
+
+command! -nargs=* Make make <args> | vert copen 50
 
 " Aliases
-func Eatchar(pat)
+function! Eatchar(pat)
   let c = nr2char(getchar(0))
   return (c =~ a:pat) ? '' : c
-endfunc
+endfunction
 
 Alias w!! write\ !sudo\ tee\ >\ /dev/null\ %
 Alias f find\ *<c-r>=Eatchar("\ ")<cr>
 
+Alias mm Make<cr>
+
 Alias tb TagbarToggle<cr>
 Alias tsm SyntasticToggleMode<cr>
 
+" filetype-specifics
 augroup mkdmaps
   autocmd!
 
@@ -98,6 +100,11 @@ augroup mkdmaps
 augroup END
 
 
+augroup haskellmaps
+  autocmd!
+
+  autocmd FileType haskell setlocal makeprg=stack\ test
+augroup END
 
 "" abbreviations
 iabbrev @-- Regards, Vladimir Okhotnikov
