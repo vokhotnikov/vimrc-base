@@ -21,7 +21,7 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 set showbreak=↪\
 set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
-set tags=./tags,tags;$HOME
+set tags=./tags;$HOME
 
 """" Vundle integration below
 
@@ -49,22 +49,23 @@ Plugin 'Konfekt/vim-alias'
 
 Plugin 'vim-airline/vim-airline'
 
+Plugin 'https://github.com/Shougo/vimproc.vim.git'
+
 Plugin 'majutsushi/tagbar'
-
 Plugin 'https://github.com/scrooloose/syntastic.git'
-
-" temporary include command-T until there is better option
-" Plugin 'wincent/command-t'
+Plugin 'keith/investigate.vim'
+Plugin 'https://github.com/godlygeek/tabular.git'
+Plugin 'https://github.com/ervandew/supertab.git'
 
 Plugin 'altercation/vim-colors-solarized'
 
 "" language-specific
 " haskell
-" Plugin 'https://github.com/eagletmt/ghcmod-vim.git'
-" Plugin 'https://github.com/eagletmt/neco-ghc'
+Plugin 'https://github.com/eagletmt/ghcmod-vim.git'
+Plugin 'https://github.com/eagletmt/neco-ghc'
 
-" Plugin 'dag/vim2hs'
-" Plugin 'bitc/vim-hdevtools'
+Plugin 'dag/vim2hs'
+Plugin 'bitc/vim-hdevtools'
 
 " scala
 " Plugin 'derekwyatt/vim-scala'
@@ -75,10 +76,7 @@ Plugin 'altercation/vim-colors-solarized'
 " Plugin 'https://github.com/garbas/vim-snipmate.git'
 " Plugin 'https://github.com/scrooloose/nerdtree.git'
 " Plugin 'https://github.com/scrooloose/nerdcommenter.git'
-" Plugin 'https://github.com/godlygeek/tabular.git'
-" Plugin 'https://github.com/ervandew/supertab.git'
 " Plugin 'https://github.com/Shougo/neocomplete.vim.git'
-" Plugin 'https://github.com/Shougo/vimproc.vim.git'
 
 call vundle#end()
 
@@ -177,26 +175,23 @@ colorscheme solarized
 "
 "autocmd FileType scala nmap <buffer> <C-_> :SortScalaImports<cr>
 "
-"" Syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
-"autocmd BufEnter *.hs set formatprg=pointfree
-"
-"let g:haskellmode_completion_ghc = 1
-"autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-"
+let g:haskellmode_completion_ghc = 1
+
+" supertab
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+
 "" tabularize
-"vnoremap a= :Tabularize /=<CR>
-"vnoremap a; :Tabularize /::<CR>
-"vnoremap a- :Tabularize /-><CR>
-"
+let g:haskell_tabular = 1
+
+" investigate
+let g:investigate_use_dash = 1
+
 "" Ctrl+P
 "let g:ctrlp_custom_ignore = '\v[\/]dist$'
 "
@@ -207,25 +202,22 @@ if executable('fast-tags')
         \ 'ctagsargs' : '-o -',
         \ 'kinds' : [
             \ 'm:module:0',
-            \ 'e:exports:1',
-            \ 'i:imports:1',
-            \ 't:declarations:0',
-            \ 'd:declarations:1',
-            \ 'n:declarations:1',
+            \ 't:types:0',
+            \ 'c:classes:0',
+            \ 'C:constructors:0',
             \ 'f:functions:0',
-            \ 'c:constructors:0'
+            \ 'o:operators:0',
+            \ 'p:patterns:0',
         \ ],
         \ 'sro' : '.',
         \ 'kind2scope' : {
-            \ 'd' : 'data',
-            \ 'n' : 'newtype',
-            \ 'c' : 'constructor',
+            \ 'C' : 'constructor',
+            \ 'c' : 'class',
             \ 't' : 'type'
         \ },
         \ 'scope2kind' : {
-            \ 'data' : 'd',
-            \ 'newtype' : 'n',
-            \ 'constructor' : 'c',
+            \ 'constructor' : 'C',
+            \ 'class' : 'c',
             \ 'type' : 't'
         \ }
     \ }

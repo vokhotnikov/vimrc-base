@@ -42,31 +42,19 @@ xnoremap q: <NOP>
 
 """ split window switch
 noremap g<space> <C-w>w
-"
 
-"" Syntastic
-"noremap <Leader>s :SyntasticToggleMode<CR>
-"
-"" ghc-mod
-"noremap <silent> tw :GhcModTypeInsert<CR>
-"noremap <silent> ts :GhcModSplitFunCase<CR>
-"noremap <silent> tq :GhcModType<CR>
-"noremap <silent> te :GhcModTypeClear<CR>
-"
-"" supertab
-"let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-"
-"if has("gui_running")
-"  inoremap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-"else " no gui
-"  if has("unix")
-"    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-"  endif
-"endif
-"
-"" tabularize
-"let g:haskell_tabular = 1
-"
+""" investigate
+nnoremap K :call investigate#Investigate('n')<CR>
+vnoremap K :call investigate#Investigate('v')<CR>
+
+if has("gui_running")
+  inoremap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+else " no gui
+  if has("unix")
+    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+  endif
+endif
+
 "" Ctrl+P
 "noremap <silent> <Leader>t :CtrlP()<CR>
 "noremap <leader>b<space> :CtrlPBuffer<cr>
@@ -75,7 +63,7 @@ noremap g<space> <C-w>w
 "noremap <Leader>n :NERDTreeToggle<CR>
 "
 
-command! -nargs=* Make make <args> | vert copen 50
+command! -nargs=* Make make <args> | exec "vert copen ".(30+(&columns-30)/3)
 
 " Aliases
 function! Eatchar(pat)
@@ -86,7 +74,7 @@ endfunction
 Alias w!! write\ !sudo\ tee\ >\ /dev/null\ %
 Alias f find\ *<c-r>=Eatchar("\ ")<cr>
 
-Alias mm Make<cr>
+Alias mm update<cr>:Make<cr>
 
 Alias tb TagbarToggle<cr>
 Alias tsm SyntasticToggleMode<cr>
@@ -95,15 +83,30 @@ Alias tsm SyntasticToggleMode<cr>
 augroup mkdmaps
   autocmd!
 
-  autocmd FileType markdown :onoremap ih :<C-u>execute "normal! ?^[=-][=-]\\+$\r:nohlsearch\rkvg_"<cr>
-  autocmd FileType markdown :onoremap ah :<C-u>execute "normal! ?^[=-][=-]\\+$\r:nohlsearch\rg_vk0"<cr>
+  autocmd FileType markdown :onoremap <buffer> ih :<C-u>execute "normal! ?^[=-][=-]\\+$\r:nohlsearch\rkvg_"<cr>
+  autocmd FileType markdown :onoremap <buffer> ah :<C-u>execute "normal! ?^[=-][=-]\\+$\r:nohlsearch\rg_vk0"<cr>
 augroup END
 
 
 augroup haskellmaps
   autocmd!
 
+  autocmd BufWritePost *.hs silent !fast-tags %
+
   autocmd FileType haskell setlocal makeprg=stack\ test
+  autocmd FileType haskell setlocal formatprg=pointfree\ --stdin
+
+  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+  autocmd FileType haskell vnoremap <buffer> a= Tabularize /=<CR>
+  autocmd FileType haskell vnoremap <buffer> a; Tabularize /::<CR>
+  autocmd FileType haskell vnoremap <buffer> a- Tabularize /-><CR>
+
+  autocmd FileType haskell Alias -buffer rri GhcModInfo<cr>
+  autocmd FileType haskell Alias -buffer rrw GhcModTypeInsert<cr>
+  autocmd FileType haskell Alias -buffer rrs GhcModSplitFunCase<cr>
+  autocmd FileType haskell Alias -buffer rrq GhcModType<cr>
+  autocmd FileType haskell Alias -buffer rre GhcModTypeClear<cr>
 augroup END
 
 "" abbreviations
