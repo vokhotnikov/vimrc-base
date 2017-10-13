@@ -25,6 +25,7 @@ set tags=./tags;$HOME
 
 let s:vimrcBase=expand("<sfile>:h")
 
+" based on https://github.com/VundleVim/Vundle.vim/issues/769
 " START - Setting up Vundle - the vim plugin bundler
 let iCanHazVundle=1
 
@@ -34,8 +35,8 @@ let vundle_readme=expand(s:vundleBase . '/README.md')
 if !filereadable(vundle_readme)
   echo "Installing Vundle.."
   echo ""
-  silent !mkdir -p s:bundlesDir
-  silent !git clone https://github.com/VundleVim/Vundle.vim.git s:vundleBase
+  silent system("mkdir -p " . s:bundlesDir)
+  silent system("git clone https://github.com/VundleVim/Vundle.vim.git " . s:vundleBase)
   let iCanHazVundle=0
 endif
 
