@@ -35,8 +35,8 @@ let vundle_readme=expand(s:vundleBase . '/README.md')
 if !filereadable(vundle_readme)
   echo "Installing Vundle.."
   echo ""
-  silent system("mkdir -p " . s:bundlesDir)
-  silent system("git clone https://github.com/VundleVim/Vundle.vim.git " . s:vundleBase)
+  silent execute("!mkdir -p " . s:bundlesDir)
+  silent execute("!git clone https://github.com/VundleVim/Vundle.vim.git " . s:vundleBase)
   let iCanHazVundle=0
 endif
 
