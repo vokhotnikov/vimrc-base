@@ -50,14 +50,6 @@ call vundle#begin(s:bundlesDir)
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-if iCanHazVundle == 0
-  echo "Installing Bundles, please ignore key map error messages"
-  echo ""
-  :PluginInstall
-endif
-" END - Setting up Vundle - the vim plugin bundler
-
-"""" Vundle integration below
 
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-unimpaired'
@@ -99,6 +91,14 @@ Plugin 'bitc/vim-hdevtools'
 " Plugin 'https://github.com/Shougo/neocomplete.vim.git'
 
 call vundle#end()
+
+"""" Vundle integration below
+if iCanHazVundle == 0
+  echo "Installing Bundles, please ignore key map error messages"
+  echo ""
+  :PluginInstall
+endif
+" END - Setting up Vundle - the vim plugin bundler
 
 set showcmd                     " display incomplete commands
 
