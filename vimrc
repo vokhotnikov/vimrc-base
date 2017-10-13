@@ -23,10 +23,21 @@ set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
 set tags=./tags;$HOME
 
-"""" Vundle integration below
-
 let s:vimrcBase=expand("<sfile>:h")
-let s:vundleBase=s:vimrcBase . "/bundles/Vundle.vim"
+
+" START - Setting up Vundle - the vim plugin bundler
+let iCanHazVundle=1
+
+let s:bundlesDir=s:vimrcBase . "/bundles"
+let s:vundleBase=s:bundlesDir . "/Vundle.vim"
+let vundle_readme=expand(s:vundleBase . '/README.md')
+if !filereadable(vundle_readme)
+  echo "Installing Vundle.."
+  echo ""
+  silent !mkdir -p s:bundlesDir
+  silent !git clone https://github.com/VundleVim/Vundle.vim.git s:vundleBase
+  let iCanHazVundle=0
+endif
 
 if empty(&rtp)
   let &rtp=s:vundleBase
@@ -34,10 +45,18 @@ else
   let &rtp=&rtp.','.s:vundleBase
 endif
 
-call vundle#begin(s:vimrcBase . "/bundles")
+call vundle#begin(s:bundlesDir)
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+if iCanHazVundle == 0
+  echo "Installing Bundles, please ignore key map error messages"
+  echo ""
+  :PluginInstall
+endif
+" END - Setting up Vundle - the vim plugin bundler
+
+"""" Vundle integration below
 
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-unimpaired'
