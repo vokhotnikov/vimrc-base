@@ -90,6 +90,8 @@ Plugin 'bitc/vim-hdevtools'
 " Plugin 'https://github.com/scrooloose/nerdcommenter.git'
 " Plugin 'https://github.com/Shougo/neocomplete.vim.git'
 
+" powershell
+Plugin 'PProvost/vim-ps1'
 call vundle#end()
 
 """" Vundle integration below
