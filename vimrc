@@ -94,6 +94,9 @@ Plugin 'bitc/vim-hdevtools'
 Plugin 'PProvost/vim-ps1'
 call vundle#end()
 
+" html
+Plugin 'mattn/emmet-vim'
+
 """" Vundle integration below
 if iCanHazVundle == 0
   echo "Installing Bundles, please ignore key map error messages"
