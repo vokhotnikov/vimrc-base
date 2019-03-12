@@ -57,6 +57,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround.git'
 Plugin 'tpope/vim-vinegar'
 
+" ag integration
+Plugin 'rking/ag.vim'
+Plugin 'Chun-Yang/vim-action-ag'
+
 Plugin 'Konfekt/vim-alias'
 
 Plugin 'vim-airline/vim-airline'
@@ -127,7 +131,7 @@ set numberwidth=4
 
 set smartindent
 
-set clipboard=unnamed,unnamedplus,autoselect
+set clipboard=unnamed,unnamedplus
 
 "set completeopt=menuone,menu,longest
 "
