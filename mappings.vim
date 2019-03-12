@@ -109,6 +109,9 @@ augroup haskellmaps
   autocmd FileType haskell Alias -buffer rre GhcModTypeClear<cr>
 augroup END
 
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
 "" abbreviations
 iabbrev @-- Regards, Vladimir Okhotnikov
 iabbrev @--r С уважением, Владимир Охотников
