@@ -77,10 +77,10 @@ Plugin 'altercation/vim-colors-solarized'
 
 "" language-specific
 " haskell
-Plugin 'https://github.com/eagletmt/ghcmod-vim.git'
-Plugin 'https://github.com/eagletmt/neco-ghc'
+"Plugin 'https://github.com/eagletmt/ghcmod-vim.git'
+"Plugin 'https://github.com/eagletmt/neco-ghc'
 
-Plugin 'dag/vim2hs'
+let g:hdevtools_stack = 1
 Plugin 'bitc/vim-hdevtools'
 
 " scala
