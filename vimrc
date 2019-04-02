@@ -57,6 +57,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround.git'
 Plugin 'tpope/vim-vinegar'
 
+Plugin 'ctrlpvim/ctrlp.vim'
+
 " ag integration
 Plugin 'rking/ag.vim'
 Plugin 'Chun-Yang/vim-action-ag'
@@ -86,7 +88,6 @@ Plugin 'bitc/vim-hdevtools'
 " scala
 " Plugin 'derekwyatt/vim-scala'
 
-" Plugin 'https://github.com/ctrlpvim/ctrlp.vim.git'
 " Plugin 'https://github.com/tomtom/tlib_vim.git'
 " Plugin 'https://github.com/MarcWeber/vim-addon-mw-utils.git'
 " Plugin 'https://github.com/garbas/vim-snipmate.git'

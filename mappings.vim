@@ -74,6 +74,8 @@ endfunction
 Alias w!! write\ !sudo\ tee\ >\ /dev/null\ %
 Alias f find\ *<c-r>=Eatchar("\ ")<cr>
 
+Alias , CtrlPMixed<cr>
+
 Alias mm update<cr>:Make<cr>
 
 Alias tb TagbarToggle<cr>
